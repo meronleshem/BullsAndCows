@@ -7,7 +7,7 @@ COL_PAD = 30
 ROW_PAD = 55
 
 ROWS = 7
-ANS_COLS = 4
+COLS = 4
 
 ## COLORS ##
 WHITE = (255, 255, 255)

@@ -35,7 +35,7 @@ def main():
                 row, col = get_row_col_from_mouse(pos)
                 board.select_circle(row, col)
 
-                board.draw_circles()
+                board.draw_board()
         pygame.display.update()
 
     pygame.quit()
