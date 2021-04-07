@@ -8,6 +8,6 @@ Every turn the player guesses a code in 4 colors, when pressed the "Submit" butt
 
 Clues:
 
-Each red clue saying one of the guess colors is the same as the code both color and position.
+* Each red clue saying one of the guess colors is the same as the code both color and position.
 
-Each yellow clue saying one of the guess colors is the same as the code only on color.
+* Each yellow clue saying one of the guess colors is the same as the code only on color.
