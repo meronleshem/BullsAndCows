@@ -20,6 +20,9 @@ class Board:
         self.create_board()
         self.draw_board()
 
+    def reset(self):
+        self.__init__(self.win)
+
     def draw_board(self):
         self.draw_circles()
 
@@ -138,9 +141,6 @@ class Board:
         return bulls, cows
 
     def click_button(self):
-        if self.button_active is False:
-            self.draw_button(DARK_GREY)
-            return 0
 
         pos = pygame.mouse.get_pos()
         if self.submit_button.collidepoint(pos):
@@ -149,9 +149,12 @@ class Board:
                 self.draw_button(BLUE_CLICK)
             elif pygame.mouse.get_pressed()[0] == 0 and self.button_clicked is True:
                 self.button_clicked = False
-                self.submit_guess()
-                self.draw_circles()
-                self.draw_button(BLUE_HOVER)
+                if self.button_active is True:
+                    self.submit_guess()
+                    self.draw_circles()
+                    self.draw_button(BLUE_HOVER)
+                else:
+                    self.reset()
             else:
                 self.draw_button(BLUE_HOVER)
         else:
@@ -162,8 +165,8 @@ class Board:
         font = pygame.font.SysFont("David", 29)
         outline_font = pygame.font.SysFont("David", 29)
         text = "Submit"
-        # if color == DARK_GREY:
-        #     text = "  Retry"
+        if self.button_active is False:
+            text = "  Retry"
         outline_text = outline_font.render(text, True, BLACK)
         button_text = font.render(text, True, WHITE)
         self.win.blit(outline_text, (350, 449))
