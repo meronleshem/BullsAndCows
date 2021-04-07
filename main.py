@@ -18,7 +18,7 @@ def main():
     run = True
     clock = pygame.time.Clock()
     WIN.fill(WIN_FILL)
-    WIN.blit(COW , (350, 12))
+    WIN.blit(COW, (350, 12))
     WIN.blit(BULL, (400, 10))
     board = Board(WIN)
 

@@ -13,7 +13,6 @@ class GuessCircle:
         self.color = GREY
         self.radius = 20
         self.active = False
-
         self.centerY = self.ROW_SPACE + 55 * self.row + 55 // 2
         self.centerX = self.COL_SPACE + 47 * self.col + 30 // 2
 
