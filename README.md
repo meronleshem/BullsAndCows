@@ -6,6 +6,8 @@ Every game starts with a random code combined with 4 different colors, the playe
 
 Every turn the player guesses a code in 4 colors, when pressed the "Submit" button the player gets clues if there's a mistake. 
 * Press on a valid circle to change his color. There are 8 color options.
+* Valid guess needs to contain 4 colors with no duplicates.
+* The player can use the "Submit" button only when he enters a valid guess.
 
 Clues:
 
