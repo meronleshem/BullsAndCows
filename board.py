@@ -4,6 +4,7 @@ from Icons.constants import *
 from guess_circle import GuessCircle
 from circle import Circle
 import random
+from pygame import mixer
 
 
 class Board:
@@ -113,8 +114,10 @@ class Board:
             self.clue_circles[self.current_row][bull].set_color(RED)
 
         if bulls == 4:
-            self.button_active = False
+            self.button_active = True
             self.finish = True
+            mixer.music.load('Icons/Winner.mp3')
+            mixer.music.play()
             return
         for cow in range(cows):
             self.clue_circles[self.current_row][cow + bulls].set_color(YELLOW)
@@ -122,7 +125,9 @@ class Board:
         self.current_row -= 1
         if self.current_row < 0:
             self.finish = True
-            self.button_active = False
+            mixer.music.load('Icons/Loser.mp3')
+            mixer.music.play()
+            self.button_active = True
             return 0
         for col in range(COLS):
             self.guess_circles[self.current_row][col].change_active()
@@ -146,7 +151,7 @@ class Board:
         self.check_guess_is_vaild()
 
         if self.button_active is False:
-            self.draw_button(DARK_GREY)
+            self.draw_button(BLUE_HOVER)
             return
 
         pos = pygame.mouse.get_pos()
