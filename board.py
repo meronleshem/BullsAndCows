@@ -15,7 +15,7 @@ class Board:
         self.code = []
         self.submit_button = Rect(SUBMIT_BUTTON)
         self.button_clicked = False
-        self.button_active = True
+        self.button_active = False
         self.finish = False
         self.create_board()
         self.draw_board()
@@ -100,7 +100,7 @@ class Board:
                     selected = temp_circle
                     break
 
-        if selected != None:
+        if selected:
             selected.change_color()
 
     def submit_guess(self):
@@ -133,7 +133,7 @@ class Board:
         index = 0
 
         for guess_circle in self.guess_circles[self.current_row]:
-             if guess_circle.color in  self.color_code_set:
+             if guess_circle.color in self.color_code_set:
                 if guess_circle.color == self.code[index].color:
                     bulls += 1
                 else:
@@ -143,6 +143,12 @@ class Board:
         return bulls, cows
 
     def click_button(self):
+        self.check_guess_is_vaild()
+
+        if self.button_active is False:
+            self.draw_button(DARK_GREY)
+            return
+
         pos = pygame.mouse.get_pos()
         if self.submit_button.collidepoint(pos):
             if pygame.mouse.get_pressed()[0] == 1:
@@ -150,7 +156,7 @@ class Board:
                 self.draw_button(BLUE_CLICK)
             elif pygame.mouse.get_pressed()[0] == 0 and self.button_clicked is True:
                 self.button_clicked = False
-                if self.button_active is True:
+                if self.button_active is True and self.finish is False:
                     self.submit_guess()
                     self.draw_board()
                     self.draw_button(BLUE_HOVER)
@@ -161,13 +167,28 @@ class Board:
         else:
             self.draw_button(BLUE)
 
+    def check_guess_is_vaild(self):
+        valid_guess = set()
+        for col in range(COLS):
+            color = self.guess_circles[self.current_row][col].color
+            if color == WHITE:
+                break
+            valid_guess.add(color)
+
+        if len(valid_guess) < 4:
+            self.button_active = False
+        else:
+            self.button_active = True
+
+
     def draw_button(self, color):
         pygame.draw.rect(self.win, color, self.submit_button)
+        text = "Submit"
+        if self.finish:
+            text = "  Reset  "
         font = pygame.font.SysFont("David", 29)
         outline_font = pygame.font.SysFont("David", 29)
-        text = "Submit"
-        if self.button_active is False:
-            text = "  Retry"
+
         outline_text = outline_font.render(text, True, BLACK)
         button_text = font.render(text, True, WHITE)
         self.win.blit(outline_text, (350, 449))
