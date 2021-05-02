@@ -17,7 +17,7 @@ class Circle:
             pygame.draw.circle(win, self.color, (self.centerX, self.centerY), self.radius)
         else:
             pygame.draw.circle(win, GREY, (self.centerX, self.centerY), self.radius)
-            win.blit(LOCK, (self.centerX -1 - LOCK.get_width()//2, (self.centerY) - LOCK.get_height()//2))
+            win.blit(LOCK, (self.centerX - 1 - LOCK.get_width()//2, self.centerY - LOCK.get_height()//2))
 
     def set_color(self, color):
         self.color = color

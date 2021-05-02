@@ -5,6 +5,7 @@ from guess_circle import GuessCircle
 from circle import Circle
 import random
 from pygame import mixer
+import time
 
 
 class Board:
@@ -27,6 +28,7 @@ class Board:
     def draw_board(self):
         self.draw_circles()
         self.draw_face()
+       # self.draw_timer(minutes, seconds)
 
     def draw_circles(self):
         for row in range(ROWS):
@@ -74,20 +76,24 @@ class Board:
         self._generate_code()
 
     def _generate_code(self):
-        code_set = set()
-        while len(code_set) < 4:
-            color_num = random.randint(0, 7)
-            code_set.add(color_num)
-
-        code_list = list(code_set)
-
+        # code_set = set()
+        # while len(code_set) < 4:
+        #     color_num = random.randint(0, 7)
+        #     code_set.add(color_num)
         self.color_code_set = set()
-        for i in code_set:
-            self.color_code_set.add(COLORS[i])
+        while len(self.color_code_set) < 4:
+            color_num = random.randint(0, 7)
+            self.color_code_set.add(COLORS[color_num])
+
+        code_list = list(self.color_code_set)
+
+        # self.color_code_set = set()
+        # for i in code_set:
+        #     self.color_code_set.add(COLORS[i])
 
         random.shuffle(code_list)
         for i in range(COLS):
-            self.code.append(Circle(0, i, 20, 47 * i + 160, 50, COLORS[code_list[i]]))
+            self.code.append(Circle(0, i, 20, 47 * i + 160, 50, code_list[i]))
 
     def select_circle(self, row, col):
         x1 = row
@@ -147,6 +153,13 @@ class Board:
 
         return bulls, cows
 
+    def draw_timer(self, minuets, seconds):
+        font = pygame.font.SysFont("David", 29)
+        timer = "{}:{}".format(round(minuets), round(seconds))
+        timer_text = font.render(timer, True, BLACK)
+        self.win.blit(timer_text, (350, 200))
+
+
     def click_button(self):
         self.check_guess_is_vaild()
 
@@ -184,7 +197,6 @@ class Board:
             self.button_active = False
         else:
             self.button_active = True
-
 
     def draw_button(self, color):
         pygame.draw.rect(self.win, color, self.submit_button)

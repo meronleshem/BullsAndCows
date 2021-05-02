@@ -1,6 +1,7 @@
 import pygame
-from Icons.constants import WIDTH, HEIGHT, WIN_FILL, COW, BULL
+from Icons.constants import WIDTH, HEIGHT, WIN_FILL, COW, BULL, BLACK
 from board import Board
+import time
 
 FPS = 60
 pygame.init()
@@ -8,11 +9,11 @@ WIN = pygame.display.set_mode((WIDTH, HEIGHT))
 
 pygame.display.set_caption('Bulls And Cows')
 
+
 def get_row_col_from_mouse(pos):
-    x, y = pos
-    row = x
-    col = y
+    row, col = pos
     return row, col
+
 
 def main():
     run = True
@@ -21,10 +22,18 @@ def main():
     WIN.blit(COW, (350, 12))
     WIN.blit(BULL, (400, 10))
     board = Board(WIN)
-
+    # start_time = time.time()
+    # seconds = 0
+    # minuets = 0
     while run:
         clock.tick(FPS)
+        #
+        # curr_time = time.time()
+        # exact_time = curr_time - start_time
+        # seconds = exact_time % 59
+        # minuets = exact_time / 59 - 0.5
 
+        board.draw_board()
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 run = False
@@ -36,6 +45,8 @@ def main():
                 board.select_circle(row, col)
 
                 board.draw_board()
+
+       # board.draw_timer(minuets, seconds)
         pygame.display.update()
 
     pygame.quit()
