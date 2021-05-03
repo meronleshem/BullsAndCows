@@ -18,22 +18,17 @@ def get_row_col_from_mouse(pos):
 def main():
     run = True
     clock = pygame.time.Clock()
-    WIN.fill(WIN_FILL)
-    WIN.blit(COW, (350, 12))
-    WIN.blit(BULL, (400, 10))
     board = Board(WIN)
-    # start_time = time.time()
-    # seconds = 0
-    # minuets = 0
+
     while run:
         clock.tick(FPS)
-        #
-        # curr_time = time.time()
-        # exact_time = curr_time - start_time
-        # seconds = exact_time % 59
-        # minuets = exact_time / 59 - 0.5
 
-        board.draw_board()
+        if not board.get_finish():
+            curr_time = time.time()
+            exact_time = curr_time - board.start_time
+            board.seconds = exact_time % 60
+            board.minutes = exact_time / 60
+
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 run = False
@@ -44,9 +39,7 @@ def main():
                 row, col = get_row_col_from_mouse(pos)
                 board.select_circle(row, col)
 
-                board.draw_board()
-
-       # board.draw_timer(minuets, seconds)
+        board.draw_board()
         pygame.display.update()
 
     pygame.quit()

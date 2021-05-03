@@ -20,15 +20,22 @@ class Board:
         self.button_active = False
         self.finish = False
         self.create_board()
+        self.start_time = time.time()
+        self.minutes = 0
+        self.seconds = 0
         self.draw_board()
 
     def reset(self):
         self.__init__(self.win)
 
     def draw_board(self):
+        self.win.fill(WIN_FILL)
+        self.win.blit(COW, (350, 12))
+        self.win.blit(BULL, (400, 10))
         self.draw_circles()
         self.draw_face()
-       # self.draw_timer(minutes, seconds)
+        self.click_button()
+        self.draw_timer(self.minutes, self.seconds)
 
     def draw_circles(self):
         for row in range(ROWS):
@@ -54,7 +61,7 @@ class Board:
             self.win.blit(DEAD, (13, 13))
         elif self.finish is False and self.current_row > 3:
             self.win.blit(SMILE, (13, 13))
-        elif self.finish is False and self.current_row > 2:
+        elif self.finish is False and self.current_row >= 2:
             self.win.blit(CONFUSED, (13, 13))
         elif self.finish is False and self.current_row < 2:
             self.win.blit(SCARED, (13, 13))
@@ -155,9 +162,9 @@ class Board:
 
     def draw_timer(self, minuets, seconds):
         font = pygame.font.SysFont("David", 29)
-        timer = "{}:{}".format(round(minuets), round(seconds))
+        timer = "{:02d}:{:02d}".format(int(minuets), int(seconds))
         timer_text = font.render(timer, True, BLACK)
-        self.win.blit(timer_text, (350, 200))
+        self.win.blit(timer_text, (365, 80))
 
 
     def click_button(self):
@@ -176,7 +183,7 @@ class Board:
                 self.button_clicked = False
                 if self.button_active is True and self.finish is False:
                     self.submit_guess()
-                    self.draw_board()
+                  #  self.draw_board()
                     self.draw_button(BLUE_HOVER)
                 else:
                     self.reset()
@@ -215,3 +222,5 @@ class Board:
         pygame.draw.line(self.win, BLACK, (340, 480), (440, 480), 2)
         pygame.draw.line(self.win, BLACK, (440, 440), (440, 480), 2)
 
+    def get_finish(self):
+        return self.finish
