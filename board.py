@@ -30,12 +30,11 @@ class Board:
 
     def draw_board(self):
         self.win.fill(WIN_FILL)
-        self.win.blit(COW, (350, 12))
-        self.win.blit(BULL, (400, 10))
         self.draw_circles()
         self.draw_face()
         self.click_button()
         self.draw_timer(self.minutes, self.seconds)
+        self.win.blit(EXIT, (410, 12))
 
     def draw_circles(self):
         for row in range(ROWS):
@@ -165,7 +164,7 @@ class Board:
         timer = "{:02d}:{:02d}".format(int(minuets), int(seconds))
         timer_text = font.render(timer, True, BLACK)
         timer_x = 365
-        timer_y = 80
+        timer_y = 65
         self.win.blit(timer_text, (timer_x, timer_y))
 
         pygame.draw.line(self.win, BLACK, (timer_x - 5, timer_y - 5), (timer_x + 68, timer_y - 5), 2)

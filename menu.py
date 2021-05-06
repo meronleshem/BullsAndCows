@@ -19,20 +19,35 @@ class Menu:
         self.win.fill(WIN_FILL)
         self.win.blit(BACKGROUND, (0, 0))
         self.draw_plus_minus()
+        self.draw_num_of_colors()
 
     def run_menu(self):
         self.draw_menu()
         self.start_button_click()
         self.plus_minus_click()
+        self.win.blit(COW, (350, 12))
+        self.win.blit(BULL, (400, 10))
+
+    def draw_num_of_colors(self):
+        if self.colors_num == 5:
+            self.win.blit(FIVE, (X_MINUS + 9, Y_PLUS_MINUS - 80))
+        elif self.colors_num == 6:
+            self.win.blit(SIX, (X_MINUS + 9, Y_PLUS_MINUS - 80))
+        elif self.colors_num == 7:
+            self.win.blit(SEVEN, (X_MINUS + 9, Y_PLUS_MINUS - 80))
+        elif self.colors_num == 8:
+            self.win.blit(EIGHT, (X_MINUS + 9, Y_PLUS_MINUS - 80))
+        elif self.colors_num == 9:
+            self.win.blit(NINE, (X_MINUS + 9, Y_PLUS_MINUS - 80))
 
     def draw_plus_minus(self):
         x_plus = 235
         x_minus = 185
         y = 200
         self.win.blit(PLUS, (X_PLUS, Y_PLUS_MINUS))
-        font = pygame.font.SysFont("David", 75)
-        num = font.render(str(self.colors_num), True, BLACK)
-        self.win.blit(num, (X_MINUS + 23, Y_PLUS_MINUS - 80))
+        # font = pygame.font.SysFont("David", 75)
+        # num = font.render(str(self.colors_num), True, BLACK)
+        # self.win.blit(num, (X_MINUS + 23, Y_PLUS_MINUS - 80))
         self.win.blit(MINUS, (X_MINUS, Y_PLUS_MINUS))
 
     def plus_minus_click(self):
@@ -46,7 +61,7 @@ class Menu:
                 self.button_clicked = True
             elif pygame.mouse.get_pressed()[0] == 0 and self.button_clicked is True:
                 self.button_clicked = False
-                if self.colors_num < 8:
+                if self.colors_num < 9:
                     self.colors_num += 1
 
         elif X_MINUS + 30 > pos[0] > X_MINUS and Y_PLUS_MINUS + 30 > pos[1] > Y_PLUS_MINUS:

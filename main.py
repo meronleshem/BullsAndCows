@@ -11,11 +11,12 @@ WIN = pygame.display.set_mode((WIDTH, HEIGHT))
 
 pygame.display.set_caption('Bulls And Cows')
 
+
 def menu():
 
     run = True
     clock = pygame.time.Clock()
-    menu = Menu(WIN)
+    menu_screen = Menu(WIN)
 
     while run:
         clock.tick(FPS)
@@ -24,12 +25,13 @@ def menu():
             if event.type == pygame.QUIT:
                 run = False
 
-        if menu.start_game:
-            main(menu.colors_num)
+        if menu_screen.start_game:
+            run = False
+            main(menu_screen.colors_num)
             break
-
-        menu.run_menu()
+        menu_screen.run_menu()
         pygame.display.update()
+    pygame.quit()
 
 
 def main(colors_num):
@@ -56,14 +58,16 @@ def main(colors_num):
             if event.type == pygame.QUIT:
                 run = False
 
-            board.click_button()
             if event.type == pygame.MOUSEBUTTONDOWN:
                 pos = pygame.mouse.get_pos()
+                if 410 + 30 > pos[0] > 410 and 12 + 30 > pos[1] > 12:
+                    run = False
+                    break
                 board.select_circle(pos)
 
         board.draw_board()
         pygame.display.update()
-
+    menu()
     pygame.quit()
 
 

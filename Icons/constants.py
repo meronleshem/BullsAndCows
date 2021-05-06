@@ -24,9 +24,9 @@ BLUE_HOVER = (40, 84, 153)
 BLUE_CLICK = (20, 44, 82)
 GREY = (217, 213, 204)
 DARK_GREY = (62, 62, 40)
-BROWN = (153, 102, 51)
+BROWN = (136, 82, 14)
 LIGHT_BROWN = (255, 204, 102)
-COLORS = [RED, BLUE, YELLOW, GREEN, PINK, TURQOUISE, PURPLE, ORANGE]
+COLORS = [RED, BLUE, YELLOW, GREEN, PINK, TURQOUISE, PURPLE, ORANGE, BROWN]
 WIN_FILL = (249, 242, 236)
 
 SUBMIT_BUTTON = (340, 440, 100, 40)
@@ -43,4 +43,11 @@ CONFUSED = pygame.transform.scale(pygame.image.load('icons/confused.png'), (90, 
 PLUS = pygame.transform.scale(pygame.image.load('icons/plus.png'), (30, 30))
 MINUS = pygame.transform.scale(pygame.image.load('icons/minus.png'), (30, 30))
 BACKGROUND = pygame.transform.scale(pygame.image.load('icons/background.jpg'), (WIDTH, HEIGHT))
+FIVE = pygame.transform.scale(pygame.image.load('icons/five.png'), (65, 65))
+SIX = pygame.transform.scale(pygame.image.load('icons/six.png'), (65, 65))
+SEVEN = pygame.transform.scale(pygame.image.load('icons/seven.png'), (65, 65))
+EIGHT = pygame.transform.scale(pygame.image.load('icons/eight.png'), (65, 65))
+NINE = pygame.transform.scale(pygame.image.load('icons/nine.png'), (65, 65))
+EXIT = pygame.transform.scale(pygame.image.load('icons/cancel.png'), (30, 30))
+
 
