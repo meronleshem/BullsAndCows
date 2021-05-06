@@ -40,4 +40,7 @@ HAPPY = pygame.transform.scale(pygame.image.load('icons/happy.png'), (90, 90))
 SMILE = pygame.transform.scale(pygame.image.load('icons/smile.png'), (90, 90))
 DEAD = pygame.transform.scale(pygame.image.load('icons/dead.png'), (90, 90))
 CONFUSED = pygame.transform.scale(pygame.image.load('icons/confused.png'), (90, 90))
+PLUS = pygame.transform.scale(pygame.image.load('icons/plus.png'), (30, 30))
+MINUS = pygame.transform.scale(pygame.image.load('icons/minus.png'), (30, 30))
+BACKGROUND = pygame.transform.scale(pygame.image.load('icons/background.jpg'), (WIDTH, HEIGHT))
 

@@ -9,8 +9,9 @@ import time
 
 
 class Board:
-    def __init__(self, win):
+    def __init__(self, win, colors_num):
         self.win = win
+        self.colors_num = colors_num
         self.current_row = ROWS - 1
         self.guess_circles = []
         self.clue_circles = []
@@ -23,10 +24,9 @@ class Board:
         self.start_time = time.time()
         self.minutes = 0
         self.seconds = 0
-        self.draw_board()
 
     def reset(self):
-        self.__init__(self.win)
+        self.__init__(self.win, self.colors_num)
 
     def draw_board(self):
         self.win.fill(WIN_FILL)
@@ -89,7 +89,7 @@ class Board:
         #     code_set.add(color_num)
         self.color_code_set = set()
         while len(self.color_code_set) < 4:
-            color_num = random.randint(0, 7)
+            color_num = random.randint(0, self.colors_num - 1)
             self.color_code_set.add(COLORS[color_num])
 
         code_list = list(self.color_code_set)
@@ -102,9 +102,9 @@ class Board:
         for i in range(COLS):
             self.code.append(Circle(0, i, 20, 47 * i + 160, 50, code_list[i]))
 
-    def select_circle(self, row, col):
-        x1 = row
-        y1 = col
+    def select_circle(self, pos):
+        x1 = pos[0]
+        y1 = pos[1]
         selected = None
         for row in range(ROWS):
             for col in range(COLS):
@@ -115,7 +115,7 @@ class Board:
                     break
 
         if selected:
-            selected.change_color()
+            selected.change_color(self.colors_num)
 
     def submit_guess(self):
         bulls, cows = self.check_guess()
@@ -164,8 +164,14 @@ class Board:
         font = pygame.font.SysFont("David", 29)
         timer = "{:02d}:{:02d}".format(int(minuets), int(seconds))
         timer_text = font.render(timer, True, BLACK)
-        self.win.blit(timer_text, (365, 80))
+        timer_x = 365
+        timer_y = 80
+        self.win.blit(timer_text, (timer_x, timer_y))
 
+        pygame.draw.line(self.win, BLACK, (timer_x - 5, timer_y - 5), (timer_x + 68, timer_y - 5), 2)
+        pygame.draw.line(self.win, BLACK, (timer_x - 5, timer_y - 5), (timer_x - 5, timer_y + 25), 2)
+        pygame.draw.line(self.win, BLACK, (timer_x - 5, timer_y + 25), (timer_x + 68, timer_y + 25), 2)
+        pygame.draw.line(self.win, BLACK, (timer_x + 68, timer_y - 5), (timer_x + 68, timer_y + 25), 2)
 
     def click_button(self):
         self.check_guess_is_vaild()

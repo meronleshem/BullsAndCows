@@ -16,10 +16,10 @@ class GuessCircle:
         self.centerY = self.ROW_SPACE + 55 * self.row + 55 // 2
         self.centerX = self.COL_SPACE + 47 * self.col + 30 // 2
 
-    def change_color(self):
+    def change_color(self, colors_num):
         if self.active is True:
             self.curr_color += 1
-            if self.curr_color >= len(COLORS):
+            if self.curr_color >= colors_num:
                 self.curr_color = 0
             self.color = COLORS[self.curr_color]
 
