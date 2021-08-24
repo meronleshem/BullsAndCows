@@ -96,12 +96,6 @@ class Menu:
 
         outline_text = outline_font.render(text, True, BLACK)
         button_text = font.render(text, True, WHITE)
-        # self.win.blit(outline_text, (350, 449))
-        # self.win.blit(button_text, (348, 447))
-        # pygame.draw.line(self.win, BLACK, (340, 440), (340, 480), 2)
-        # pygame.draw.line(self.win, BLACK, (340, 440), (440, 440), 2)
-        # pygame.draw.line(self.win, BLACK, (340, 480), (440, 480), 2)
-        # pygame.draw.line(self.win, BLACK, (440, 440), (440, 480), 2)
         self.win.blit(outline_text, (X_START + 7, y + 10))
         self.win.blit(button_text, (X_START + 5, y + 8))
         pygame.draw.line(self.win, BLACK, (X_START, Y_START), (X_START, Y_START + 40), 2)
